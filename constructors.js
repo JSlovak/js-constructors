@@ -52,6 +52,9 @@ DamageSpell.prototype = Object.create(Spell.prototype,{
   }
 
   Spellcaster.prototype.inflictDamage = function(damage){
+    if (this.health = 0) {
+      this.isAlive = false;
+    }
     if(this.health <= damage){
       this.isAlive = false;
     }
