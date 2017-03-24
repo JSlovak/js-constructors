@@ -1,3 +1,4 @@
+
 /**
  * Creates a generic spell that can be cast.
  *
@@ -10,6 +11,17 @@
  * @property {string} description
  * @method   getDetails
  */
+
+ function Spell (name, cost, description){
+    this.name = name;
+    this.cost = cost;
+    this.description = description;
+
+   Spell.prototype.getDetails = function(){
+     return this.name + " / " + this.cost + " / " + this.description;
+
+    };
+  }
 
   /**
    * Returns a string of all of the spell's details.
