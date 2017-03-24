@@ -63,7 +63,15 @@ DamageSpell.prototype = Object.create(Spell.prototype,{
     }
   };
 
-  Spellcaster.prototype.spendMana = function(){
+  Spellcaster.prototype.spendMana = function(cost){
+    if(this.mana >= cost) {
+      this.mana -= cost;
+      return true;
+    } else
+      {
+        return false;
+
+    }
 
   };
 
