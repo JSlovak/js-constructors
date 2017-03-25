@@ -217,6 +217,7 @@ describe('Spellcaster', function() {
       it('should only spend mana if the DamageSpell was succesfully invoked', function() {
         var loren = new Spellcaster('Loren', 300, 125),
           forcePulse = new DamageSpell('Force Pulse', Math.floor(loren.mana/2), Math.floor(loren.mana/10), 'Strikes a foe with a powerful blast, knocking them to the ground.');
+        var totalMana = loren.mana;
         expect(loren.invoke(forcePulse, null)).to.be.false;
         expect(loren.mana).to.equal(totalMana);
         expect(loren.invoke(forcePulse, loren)).to.be.true;

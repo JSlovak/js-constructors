@@ -52,15 +52,12 @@ DamageSpell.prototype = Object.create(Spell.prototype,{
   }
 
   Spellcaster.prototype.inflictDamage = function(damage){
-    if (this.health = 0) {
-      this.isAlive = false;
-    }
-    if(this.health <= damage){
-      this.isAlive = false;
-    }
-    else {
       this.health -= damage;
-    }
+
+      if( this.health <= 0){
+        this.isAlive = false;
+        this.health = 0;
+      }
   };
 
   Spellcaster.prototype.spendMana = function(cost){
@@ -70,16 +67,40 @@ DamageSpell.prototype = Object.create(Spell.prototype,{
     } else
       {
         return false;
-
     }
-
   };
 
-  Spellcaster.prototype.invoke = function(){
+  Spellcaster.prototype.invoke = function(spell, opponent) {
+    console.log(spell);
+    if(spell instanceof Spell) {
+      if(spell instanceof DamageSpell){
+        if (!opponent){
+          return false;
+        }
+        if(this.mana >= spell.cost){
+          this.spendMana(spell.cost);
+          opponent.inflictDamage(spell.damage);
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
 
+      if(spell instanceof Spell){
+        if(this.mana >= spell.cost){
+          this.spendMana(spell.cost);
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
+    }
+    else {
+      return false;
+    }
   };
-
-
 
   /**
    * @method inflictDamage
